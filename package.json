@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@iamtraction/google-translate": "github:iamtraction/google-translate",
     "express": "^4.21.0"
   }
 }
