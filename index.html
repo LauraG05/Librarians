@@ -14,7 +14,22 @@
     <div class="container input-container">
         <div class="input-group">
             <input type="text" id="userInput" class="form-control" placeholder="Traduci...">
-            <button class="btn btn-primary" onclick="submitInput()">🔍</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="submitInput()">🔍</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5"  id="spazioTrad">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="def"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="d-flex flex-column" style="padding-top:30px">
