@@ -246,35 +246,13 @@ const glossario = {
     }
 };
 
-// aggiungere sala ragazzi, mediateca, uffici, 
-
-
-/* Funzione per calcolare la distanza di Levenshtein
-function distanzaLevenshtein(a, b) {
-    const matrix = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
-
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
-
-    for (let i = 1; i <= a.length; i++) {
-        for (let j = 1; j <= b.length; j++) {
-            const costo = a[i - 1] === b[j - 1] ? 0 : 1;
-            matrix[i][j] = Math.min(
-                matrix[i - 1][j] + 1,       // cancellazione
-                matrix[i][j - 1] + 1,       // inserimento
-                matrix[i - 1][j - 1] + costo // sostituzione
-            );
-        }
-    }
-
-    return matrix[a.length][b.length];
-}*/
 
 // Funzione per riempire il modal
 function riempiModal() {
     const text = document.getElementById('userInput').value.trim().toLowerCase(); // Prende l'input dell'utente e lo normalizza
-    const def = document.getElementById('def');
+    const descriptionContainer = document.getElementById('description-container');
     let trovato = false;
+
 
     output.innerHTML = text.toUpperCase();
 
@@ -282,6 +260,7 @@ function riempiModal() {
     for (let parola in glossario) {
         if (text === parola.toLowerCase()) {
             // Mostra traduzione e significato se la parola è trovata
+            descriptionContainer.style.backgroundColor = '#D7A154';
             def.innerHTML = `Traduzione: ${glossario[parola].traduzione}<br>Definizione: ${glossario[parola].significato}`;
             trovato = true;
             break;
@@ -292,6 +271,7 @@ function riempiModal() {
     if (!trovato) {
         def.innerHTML = "Termine non trovato.";
     }
+
 
     // Codice per la funzione di suggerimento con distanza di Levenshtein
     // Funzione per calcolare la distanza di Levenshtein
@@ -321,6 +301,7 @@ function riempiModal() {
 
     // Se la parola non è trovata, cerca il suggerimento migliore
     if (!trovato) {
+
         for (let parola in glossario) {
             const distanza = distanzaLevenshtein(text, parola.toLowerCase());
             if (distanza < distanzaMinima) {
@@ -332,11 +313,20 @@ function riempiModal() {
         def.innerHTML = suggerimento
             ? `Termine non trovato. Forse cercavi: <strong>${suggerimento}</strong>?`
             : "Termine non trovato e nessun suggerimento disponibile.";
+
+        descriptionContainer.style.backgroundColor = '#a77d42';
     }
-    
+
+    // Mostra la descrizione
+    descriptionContainer.classList.remove('cancella');
+    console.log(descriptionContainer.classList);
+
 }
 
 // Imposta l'evento onclick sul pulsante
-submitParola.onclick = function() {
+submitParola.onclick = function () {
     riempiModal();
 };
+
+const descriptionContainer = document.getElementById('description-container');
+console.log(descriptionContainer.classList);
